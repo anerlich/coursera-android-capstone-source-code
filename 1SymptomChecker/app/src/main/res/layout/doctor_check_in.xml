@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+	<LinearLayout
+	    android:id="@+id/llDoctorCheckinTop"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dp"
+	    android:orientation="horizontal" >
+    
+    <TextView
+        android:id="@+id/tvCheckInDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="xxxxx"
+android:focusableInTouchMode="false"
+android:clickable="false"
+android:focusable="false"        android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/ckTookMedication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="10dp"
+            android:gravity="right"
+            android:text="@string/title_medication_question_short"
+android:focusableInTouchMode="false"
+android:clickable="false"
+android:focusable="false"            android:textSize="12sp" />
+
+	   </LinearLayout>
+	<LinearLayout
+	    android:id="@+id/llDoctorCheckinBottom"
+	    android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+	    android:layout_below="@+id/llDoctorCheckinTop"
+	    >"
+    <TextView
+        android:id="@+id/tvPain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:focusableInTouchMode="false"
+android:clickable="false"
+android:focusable="false"        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvEatingAffect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xxxxx"
+ android:focusableInTouchMode="false"
+android:clickable="false"
+android:focusable="false"
+       android:textSize="12sp" />
+
+   </LinearLayout>
+   
+</LinearLayout>

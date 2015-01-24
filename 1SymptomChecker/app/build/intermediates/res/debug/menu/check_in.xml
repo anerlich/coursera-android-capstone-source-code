@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="au.com.anerlich.symptomchecker.CheckInActivity" >
+
+    <item
+        android:id="@+id/action_settings_patient"
+        android:orderInCategory="100"
+        android:title="@string/title_activity_patient_settings"
+        app:showAsAction="never"/>
+
+        <item
+        android:id="@+id/action_details_patient"
+        android:orderInCategory="100"
+        android:title="@string/title_activity_patient_details"
+        app:showAsAction="never"/>
+    
+</menu>
+<!-- From: file:/home/andrew/CourseraAndroidCapstoneSourceCode/1SymptomChecker/app/src/main/res/menu/check_in.xml -->

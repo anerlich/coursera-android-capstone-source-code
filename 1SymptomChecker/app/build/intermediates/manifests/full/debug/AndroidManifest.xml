@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="au.com.azarel.symptomchecker"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="au.com.azarel.symptomchecker.StartActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="au.com.azarel.symptomchecker.CheckInActivity"
+            android:label="@string/title_activity_check_in" >
+        </activity>
+        <activity
+            android:name="au.com.azarel.symptomchecker.CheckInReadOnlyActivity"
+            android:label="@string/title_activity_check_in" >
+        </activity>
+        <activity
+            android:name="au.com.azarel.symptomchecker.TimeSettingsActivity"
+            android:label="@string/action_settings" >
+        </activity>
+
+        <receiver
+            android:name="au.com.azarel.symptomchecker.CheckInReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
+
+        <activity
+            android:name="au.com.azarel.symptomchecker.DoctorPatientListActivity"
+            android:label="@string/title_activity_doctor_patient_list" >
+        </activity>
+        <activity
+            android:name="au.com.azarel.symptomchecker.PatientGraphActivity"
+            android:label="@string/title_activity_patient_graph" >
+        </activity>
+        <activity
+            android:name="au.com.azarel.symptomchecker.DoctorCheckInListActivity"
+            android:label="@string/title_activity_doctor_checkin_list" >
+        </activity>
+        <activity
+            android:name="au.com.azarel.symptomchecker.PatientMedicationListActivity"
+            android:label="@string/title_activity_patient_medication_list" >
+        </activity>
+        <activity
+            android:name="au.com.azarel.symptomchecker.DoctorSettingsActivity"
+            android:label="@string/title_activity_doctor_settings" >
+        </activity>
+
+        <service
+            android:name="au.com.azarel.symptomchecker.DoctorAlertService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
+
+        <receiver
+            android:name="au.com.azarel.symptomchecker.DoctorAlertReceiver"
+            android:enabled="true"
+            android:exported="true" >
+        </receiver>
+
+        <activity
+            android:name="au.com.azarel.symptomchecker.DetailsActivity"
+            android:label="@string/title_activity_details" >
+        </activity>
+    </application>
+
+</manifest>
