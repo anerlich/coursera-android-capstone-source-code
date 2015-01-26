@@ -57,10 +57,7 @@ public class PatientMedication {
 	
 	public void setPatient(Patient patient) {
 		this.patient = patient;
-/*		if (!patient.getPatientMedications().contains(this)) {
-			patient.getPatientMedications().add(this);
-		}
-*/	}
+	}
 
 	public long getPmPatientId() {
 		return pmPatientId;

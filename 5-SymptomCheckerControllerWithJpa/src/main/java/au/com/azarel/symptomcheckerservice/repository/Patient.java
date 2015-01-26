@@ -26,23 +26,13 @@ public class Patient {
 	private long patientId;
 	private String firstName;
 	private String lastName;
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Calendar dateOfBirth;
+//  Use long to store date as it is the simplest option
 	private long dateOfBirth;
 	private String patUUID;
 	private long userId;
 	private boolean hasCriticalIssue;
 	private boolean issueReported;
 	
-/*	@OneToMany(mappedBy="patient")
-	Set<DoctorPatient>doctorPatients;
-*/	
-/*	@OneToMany(mappedBy="patient")
-	Set<CheckIn> checkIns;
-*/
-/*	@OneToMany(mappedBy="patient")
-	Set<PatientMedication> patientMedications;
-*/
 	public Patient() {		
 	}
 	
@@ -55,9 +45,6 @@ public class Patient {
 		this.userId = userId;
 		this.hasCriticalIssue = hasCriticalIssue;
 		this.issueReported = issueReported;
-//		this.doctorPatients = new HashSet<DoctorPatient>();
-		//checkIns = new HashSet<CheckIn>();
-		//patientMedications = new HashSet<PatientMedication>();
 	}
 
 
@@ -85,21 +72,7 @@ public class Patient {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-/*	public Set<DoctorPatient> getDoctorPatients(){
-		return doctorPatients;
-	}
 	
-	public void setDoctorPatients(Set<DoctorPatient> doctorPatients){
-		this.doctorPatients= doctorPatients;
-	}
-	
-	public void addDoctorPatient(DoctorPatient doctorPatient) {
-		this.doctorPatients.add(doctorPatient);
-		if (!doctorPatient.getPatient().equals(this)){
-			doctorPatient.setPatient(this);
-		}
-	}
-*/	
 	public long getPatientId() {
 		return patientId;
 	}
@@ -107,41 +80,7 @@ public class Patient {
 	public void setPatientId(long patientId) {
 		this.patientId = patientId;
 	}
-	
-/*	public Set<CheckIn> getCheckIns() {
-		return checkIns;
-	}
-	
-	public void setCheckIns(Set<CheckIn> checkIns) {
-		this.checkIns = checkIns;
-	}
-	
-	
-	public void addCheckIn(CheckIn checkIn) {
-		this.checkIns.add(checkIn);
-		if (!checkIn.getPatient().equals(this)){
-			checkIn.setPatient(this);
-		}			
-	}
-*/
-	
-/*	public Set<PatientMedication> getPatientMedications() {
-		return patientMedications;
-	}
-	
-	public void setPatientMedications(Set<PatientMedication> patientMedications) {
-		this.patientMedications = patientMedications;
-	}
-	
-	
-	public void addPatientMedication(PatientMedication patientMedication) {
-		this.patientMedications.add(patientMedication);
-		if (!patientMedication.getPatient().equals(this)){
-			patientMedication.setPatient(this);
-		}
-			
-	}
-*/
+
 	
 	public String getPatUUID() {
 		return patUUID;
@@ -176,18 +115,14 @@ public class Patient {
 	}
 
 	@Override
-/*	public int hashCode() {
-		// Google Guava provides great utilities for hashing
-		return Objects.hashCode(name, doctor.getId());
-	}
-*/	public int hashCode() {
+	public int hashCode() {
 		// Google Guava provides great utilities for hashing
 		return Objects.hashCode(firstName, lastName);
 	}
 
 	/**
 	 * Two Patients are considered equal if they have exactly the same values for
-	 * their name and doctorId.
+	 * their first and last names.
 	 * 
 	 */
 	@Override

@@ -87,10 +87,7 @@ public class CheckInMedication {
 	
 	public void setCheckIn(CheckIn checkIn) {
 		this.checkIn = checkIn;
-/*		if (!checkIn.checkInMedications.contains(this)){
-			checkIn.checkInMedications.add(this);
-		}
-*/	}
+	}
 	
 	public PatientMedication getPatientMedication() {
 		return patientMedication;
@@ -120,7 +117,7 @@ public class CheckInMedication {
 
 	/**
 	 * Two Videos will generate the same hashcode if they have exactly the same
-	 * values for their patient's id and the check in time.
+	 * values for their CheckInId and PatientMedicationId.
 	 * 
 	 */
 	@Override
@@ -130,8 +127,8 @@ public class CheckInMedication {
 	}
 
 	/**
-	 * Two CheckIns are considered equal if they have exactly the same values for
-	 * their patient's Id and checkInTime.
+	 * Two CheckInMedications are considered equal if they have exactly the same values for
+	 * their CheckInId and PatientMedicationId.
 	 * 
 	 */
 	@Override

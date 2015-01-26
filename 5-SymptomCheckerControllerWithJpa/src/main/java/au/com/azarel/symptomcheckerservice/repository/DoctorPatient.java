@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 
 import com.google.common.base.Objects;
 
+// Manages many to many doctor/patient relationship with a linking table
+
 @Entity
 public class DoctorPatient {
 	@Id
@@ -39,12 +41,6 @@ public class DoctorPatient {
 		this.dpPatientId=patientId;
 	}
 
-/*	public DoctorPatient(long doctorId, long patientId, String description){
-		this.doctorId = doctorId;
-		this.patientId=patientId;
-		this.description = description;
-	}
-*/
 	public long getDoctorPatientId() {
 		return doctorPatientId;
 	}
@@ -75,10 +71,7 @@ public class DoctorPatient {
 	
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
-/*		if (!doctor.getDoctorPatients().contains(this)) {
-			doctor.getDoctorPatients().add(this);
-		}
-*/	}
+	}
 
 	public Patient getPatient() {
 		return patient;
@@ -86,10 +79,7 @@ public class DoctorPatient {
 	
 	public void setPatient(Patient patient) {
 		this.patient = patient;
-/*		if (!patient.getDoctorPatients().contains(this)) {
-			patient.getDoctorPatients().add(this);
-		}
-*/	}
+	}
 
 	public String getDescription() {
 		return description;
@@ -106,8 +96,8 @@ public class DoctorPatient {
 	}
 
 	/**
-	 * Two Patients are considered equal if they have exactly the same values for
-	 * their first and last names.
+	 * Two DoctorPatients are considered equal if they have exactly the same values for
+	 * their doctorId and patientId.
 	 * 
 	 */
 	@Override

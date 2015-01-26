@@ -127,22 +127,8 @@ public class CheckIn {
 		this.checkInId = checkInId;
 	}
 	
-/*	public Set<CheckInMedication> getCheckInMedications() {
-		return checkInMedications;
-	}
-	
-	public void setCheckInMedications(Set<CheckInMedication> checkInMedications){
-		this.checkInMedications = checkInMedications;
-	}
-	
-	public void addCheckInMedication(CheckInMedication checkInMedication) {
-		this.checkInMedications.add(checkInMedication);
-		if (!checkInMedication.getCheckIn().equals(this)) {
-			checkInMedication.setCheckIn(this);
-		}
-	}
 
-*/	/**
+	/**
 	 * Two Check Ins will generate the same hashcode if they have exactly the same
 	 * values for their patient's id and the check in time.
 	 * 

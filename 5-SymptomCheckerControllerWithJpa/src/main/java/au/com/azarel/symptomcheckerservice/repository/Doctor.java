@@ -21,9 +21,9 @@ import com.google.common.base.Objects;
 @Entity
 public class Doctor {
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-	@GeneratedValue(generator = "generatorName")
-	@SequenceGenerator(name = "generatorName", sequenceName = "SEQ_NAME")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@GeneratedValue(generator = "generatorName")
+//	@SequenceGenerator(name = "generatorName", sequenceName = "SEQ_NAME")
 	private long doctorId;
 	private String firstName;
 	private String lastName;
@@ -81,21 +81,6 @@ public String getDocUUID() {
 		this.userId = userId;
 	}
 
-	/*	public List<DoctorPatient> getDoctorPatients(){
-		return doctorPatients;
-	}
-	
-	public void setDoctorPatients(List<DoctorPatient> doctorPatients){
-		this.doctorPatients= doctorPatients;
-	}
-	
-	public void addDoctorPatient(DoctorPatient doctorPatient) {
-		this.doctorPatients.add(doctorPatient);
-		if (!doctorPatient.getDoctor().equals(this)){
-			doctorPatient.setDoctor(this);
-		}
-	}
-*/
 	@Override
 	public int hashCode() {
 		// Google Guava provides great utilities for hashing
@@ -103,7 +88,7 @@ public String getDocUUID() {
 	}
 
 	/**
-	 * Two Patients are considered equal if they have exactly the same values for
+	 * Two Doctors are considered equal if they have exactly the same values for
 	 * their first and last names.
 	 * 
 	 */

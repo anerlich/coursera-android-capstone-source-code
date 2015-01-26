@@ -28,22 +28,10 @@ public class User {
 	private long userId;
 	private String firstName;
 	private String lastName;
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Calendar dateOfBirth;
 	private String userName;
 	 @Enumerated(EnumType.STRING)
-	private UserType userType;					//how is the patient's pain?
-
+	private UserType userType;
 	
-/*	@OneToMany(mappedBy="patient")
-	Set<DoctorPatient>doctorPatients;
-*/	
-/*	@OneToMany(mappedBy="patient")
-	Set<CheckIn> checkIns;
-*/
-/*	@OneToMany(mappedBy="patient")
-	Set<PatientMedication> patientMedications;
-*/
 	public User() {		
 	}
 	
@@ -102,8 +90,8 @@ public class User {
 	}
 
 	/**
-	 * Two Patients are considered equal if they have exactly the same values for
-	 * their name and doctorId.
+	 * Two Users are considered equal if they have exactly the same values for
+	 * their first and last names.
 	 * 
 	 */
 	@Override
