@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * An interface for a repository that can store Patient
- * objects and allow them to be searched by title.
+ * An interface for a repository that can store User
+ * objects and allow them to be searched by userName.
  * 
  * @author jules
  *

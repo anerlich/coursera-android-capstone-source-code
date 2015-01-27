@@ -23,6 +23,7 @@ import retrofit.http.Query;
  * interface is used to provide a contract for client/server
  * interactions. The interface is annotated with Retrofit
  * annotations so that clients can automatically convert the
+ * URL into function calls
  * 
  * Adapted from Mobile Cloud example code:
  * @author jules
@@ -41,6 +42,8 @@ public interface SymptomCheckerSvcApi {
 
 	public static final String USERNAME_PARAMETER = "username";
 
+	// log in/out
+	
 	@FormUrlEncoded
 	@POST(LOGIN_PATH)
 	public Response login(@Field(USERNAME_PARAMETER) String username, @Field(PASSWORD_PARAMETER) String pass);// throws UnauthorizedException;
@@ -48,18 +51,43 @@ public interface SymptomCheckerSvcApi {
 	@GET(LOGOUT_PATH)
 	public Response logout();
 
+	// Doctor
 	
 	@GET("/doctor")
 	public Collection<Doctor> getDoctorList();
 
 	@POST("/doctor")
 	public Doctor addDoctor(@Body Doctor d);
+	
+	@GET("/doctor/{id}")
+	public Doctor getDoctorById(@Path("id") long id);
+
+	@GET("/doctor/findDoctorByUserId")
+	public Collection<Doctor> findDoctorByUserId(@Query("userId") long userId);	
+
+	//Patient
 
 	@GET("/patient")
 	public Collection<Patient> getPatientList();
 
 	@POST("/patient")
 	public Patient addPatient(@Body Patient p);
+
+	@GET("/patient/{id}")
+	public Patient getPatientById(@Path("id") long id);
+
+	@GET("/patient/findPatientByLastNameAndDoctorId")
+	public Collection<Patient> findPatientByLastNameAndDoctorId(
+			@Query("lastName") String lastName,
+			@Query("doctorId") long doctorId);
+	
+	@PATCH("/patient/{id}/updatePatientReportStatus")
+	public Patient updatePatientReportStatus(@Path("id") long id);
+
+	@GET("/patient/findPatientByUserId")
+	public Collection<Patient> findPatientByUserId(@Query("userId") long userId);
+	
+	//DoctorPatient
 
 	@GET("/doctorpatient")
 	public Collection<DoctorPatient> getDoctorPatientList();
@@ -70,9 +98,8 @@ public interface SymptomCheckerSvcApi {
 	@GET("/doctorpatient/findDoctorPatientByDpDoctorId")
 	public Collection<DoctorPatient> findDoctorPatientByDpDoctorId(@Query("dpDoctorId") long dpDoctorId);
 
-	/*	@GET("/doctorpatient/findByPatientId")
-	public Collection<DoctorPatient> findByPatientId(@Query("patientId") long patientId);
-*/
+	// CheckIn
+	
 	@GET("/checkin")
 	public Collection<CheckIn> getCheckInList();
 
@@ -94,12 +121,30 @@ public interface SymptomCheckerSvcApi {
 			@Query("ciPatientId") long ciPatientId,
 			@Query("checkInTime") long checkInTime,
 			@Query("eatingAffect") List<EatingAffect> eatingAffect);
+	
+	//PatientMedication
 
 	@GET("/patientmedication")
 	public Collection<PatientMedication> getPatientMedicationList();
 
 	@POST("/patientmedication")
 	public PatientMedication addPatientMedication(@Body PatientMedication pm);
+	
+	@GET("/patientmedication/findPatientMedicationByPmPatientId")
+	public Collection<PatientMedication> findPatientMedicationByPmPatientId(@Query("pmPatientId") long pmPatientId);
+
+	//CheckInMedication
+	
+	@GET("/checkinmedication")
+	public Collection<CheckInMedication> getCheckInMedicationList();
+
+	@POST("/checkinmedication")
+	public CheckInMedication addCheckInMedication(@Body CheckInMedication cim);
+
+	@GET("/checkinmedication/findCheckInMedicationByCimCheckInId")
+	public Collection<CheckInMedication> findCheckInMedicationByCimCheckInId(@Query("cimCheckInId") long cimCheckInId);
+
+	//User
 
 	@GET("/user")
 	public Collection<User> getUserList();
@@ -110,38 +155,7 @@ public interface SymptomCheckerSvcApi {
 	@GET("/user/{id}")
 	public User getUserById(@Path("id") long id);
 
-	@GET("/doctor/{id}")
-	public Doctor getDoctorById(@Path("id") long id);
-
-	@GET("/patient/{id}")
-	public Patient getPatientById(@Path("id") long id);
-
-	@GET("/patient/findPatientByLastNameAndDoctorId")
-	public Collection<Patient> findPatientByLastNameAndDoctorId(
-			@Query("lastName") String lastName,
-			@Query("doctorId") long doctorId);
-	
-	@PATCH("/patient/{id}/updatePatientReportStatus")
-	public Patient updatePatientReportStatus(@Path("id") long id);
-
-	@GET("/patientmedication/findPatientMedicationByPmPatientId")
-	public Collection<PatientMedication> findPatientMedicationByPmPatientId(@Query("pmPatientId") long pmPatientId);
-
-	@GET("/checkinmedication")
-	public Collection<CheckInMedication> getCheckInMedicationList();
-
-	@POST("/checkinmedication")
-	public CheckInMedication addCheckInMedication(@Body CheckInMedication cim);
-
-	@GET("/checkinmedication/findCheckInMedicationByCimCheckInId")
-	public Collection<CheckInMedication> findCheckInMedicationByCimCheckInId(@Query("cimCheckInId") long cimCheckInId);
-
 	@GET("/user/findUserByUserName")
 	public Collection<User> findUserByUserName(@Query("userName") String userName);
 	
-	@GET("/doctor/findDoctorByUserId")
-	public Collection<Doctor> findDoctorByUserId(@Query("userId") long userId);
-	
-	@GET("/patient/findPatientByUserId")
-	public Collection<Patient> findPatientByUserId(@Query("userId") long userId);
 }
