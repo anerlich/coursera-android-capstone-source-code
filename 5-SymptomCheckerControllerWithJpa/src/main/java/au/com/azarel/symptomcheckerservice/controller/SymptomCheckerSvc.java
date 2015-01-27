@@ -88,8 +88,6 @@ public class SymptomCheckerSvc implements SymptomCheckerSvcApi {
 
 	@RequestMapping(value="/doctor/findDoctorByUserId", method=RequestMethod.GET)
 	public @ResponseBody Collection<Doctor> findDoctorByUserId(
-			// Tell Spring to use the "title" parameter in the HTTP request's query
-			// string as the value for the title method parameter
 			@RequestParam("userId") long userId
 	){
 		return doctors.findDoctorByUserId(userId);
@@ -190,8 +188,6 @@ public class SymptomCheckerSvc implements SymptomCheckerSvcApi {
 
 	@RequestMapping(value="/patient/findPatientByUserId", method=RequestMethod.GET)
 	public @ResponseBody Collection<Patient> findPatientByUserId(
-			// Tell Spring to use the "title" parameter in the HTTP request's query
-			// string as the value for the title method parameter
 			@RequestParam("userId") long userId
 	){
 		return patients.findPatientByUserId(userId);
@@ -295,8 +291,6 @@ public class SymptomCheckerSvc implements SymptomCheckerSvcApi {
 
 	@RequestMapping(value="checkinmedication/findCheckInMedicationByCimCheckInId", method=RequestMethod.GET)
 	public @ResponseBody Collection<CheckInMedication> findCheckInMedicationByCimCheckInId(
-			// Tell Spring to use the "title" parameter in the HTTP request's query
-			// string as the value for the title method parameter
 			@RequestParam("cimCheckInId") long cimCheckInId
 	){
 		return checkInMedications.findCheckInMedicationByCimCheckInId(cimCheckInId);
