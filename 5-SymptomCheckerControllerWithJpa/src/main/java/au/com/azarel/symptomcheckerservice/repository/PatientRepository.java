@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * An interface for a repository that can store Patient
- * objects and allow them to be searched by title.
+ * objects and allow them to be searched for.
  * 
  * @author jules
  *
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PatientRepository extends CrudRepository<Patient, Long>{
 
-	// Find all Patients with a matching title (e.g., Patient.name)
+	// Find all Patients with a matching last name in a list of patientId's
 	@Query("from Patient p where UPPER(p.lastName) LIKE CONCAT(UPPER(TRIM(:lastName)), '%') and p.patientId in (:listIds) order by UPPER(p.lastName)")
 	public Collection<Patient> findPatientByLastNameAndList(
 			// The @Param annotation tells Spring Data Rest which HTTP request
@@ -30,19 +30,13 @@ public interface PatientRepository extends CrudRepository<Patient, Long>{
 			@Param("lastName") String lastName,
 			@Param("listIds") List<Long> listIds);
 
+	// Find all Patients with a matching userId
 	public Collection<Patient> findPatientByUserId(
 			// The @Param annotation tells Spring Data Rest which HTTP request
 			// parameter it should use to fill in the "title" variable used to
 			// search for Patients
 			@Param("userId") long userId);
-
-	// Find all Patients that are shorter than a specified duration
-/*	public Collection<Patient> findByDurationLessThan(
-			// The @Param annotation tells tells Spring Data Rest which HTTP request
-			// parameter it should use to fill in the "duration" variable used to
-			// search for Patients
-			@Param(PatientSvcApi.DURATION_PARAMETER) long maxduration);
-*/	
+	
 	/*
 	 * See: http://docs.spring.io/spring-data/jpa/docs/1.3.0.RELEASE/reference/html/jpa.repositories.html 
 	 * for more examples of writing query methods
