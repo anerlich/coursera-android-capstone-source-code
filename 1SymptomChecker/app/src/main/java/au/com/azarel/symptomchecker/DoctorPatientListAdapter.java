@@ -65,20 +65,20 @@ public class DoctorPatientListAdapter extends BaseAdapter {
 	        grid = convertView;
 	    }
 
-	    TextView tv = (TextView) grid.findViewById(R.id.tvPatientName);    
-	    tv.setText(mPatientList.get(position).getFirstName() + " " + mPatientList.get(position).getLastName());
-		// make background red if patient has a reportable pain or eating issue
-	    // I realise this isn't great UI design for those with color blindness or accessibility issues
-	    if (mPatientList.get(position).isHasCriticalIssue()) {
-			grid.setBackgroundColor(Color.RED);
-		}
+	    TextView tv = (TextView) grid.findViewById(R.id.tvPatientName);
+        // prefix patient name with exclamation if patient has a critical pain or eating issue
+        String strPatientName = "";
+        if (mPatientList.get(position).isHasCriticalIssue()) {
+            strPatientName = "! ";
+        }
+        strPatientName += mPatientList.get(position).getFirstName() + " " + mPatientList.get(position).getLastName();
+	    tv.setText(strPatientName);
 	    final int pos2=position;
 	    // when list item is clicked, open PatientGraphActivity for the selected patient
 	    tv.setOnClickListener(new OnClickListener(){
 	    	public void onClick(View v){            		
 	    		mView = v;
 	    		Intent graphIntent = new Intent(mContext,PatientGraphActivity.class);
-	    		//Intent graphIntent = new Intent(mContext,DoctorCheckInListActivity.class);
 	    		graphIntent.putExtra("serverPrefs", mServerPrefs);
 	    		graphIntent.putExtra("userName", mUserName);
 	    		graphIntent.putExtra("password", mPassword);
