@@ -70,6 +70,9 @@ public class DoctorPatientListAdapter extends BaseAdapter {
         String strPatientName = "";
         if (mPatientList.get(position).isHasCriticalIssue()) {
             strPatientName = "! ";
+            tv.setTextColor(Color.RED);
+        } else {
+            tv.setTextColor(Color.BLACK);
         }
         strPatientName += mPatientList.get(position).getFirstName() + " " + mPatientList.get(position).getLastName();
 	    tv.setText(strPatientName);
