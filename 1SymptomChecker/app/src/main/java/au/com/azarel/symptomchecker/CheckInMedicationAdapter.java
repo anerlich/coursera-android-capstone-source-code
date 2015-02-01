@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -64,13 +66,33 @@ public class CheckInMedicationAdapter extends BaseAdapter {
 	    }
 
 	    // name of medication
-	    TextView tvMedication = (TextView) grid.findViewById(R.id.tvMedication);   
+	    TextView tvMedication = (TextView) grid.findViewById(R.id.tvMedication);
+        CheckBox ckTookIt = (CheckBox) grid.findViewById(R.id.ckMedication);
 	    
 	    // default date and time taken to current date and time
 	    TextView tvDate = (TextView) grid.findViewById(R.id.tvDate);
 	    TextView tvTime = (TextView) grid.findViewById(R.id.tvTime);
 	    tvMedication.setText(mCheckInMedications.get(position).getPatientMedication().getMedication());
-	    Date dateNow = new Date();
+        ckTookIt.setChecked(mCheckInMedications.get(position).getTookIt());
+        final int pos2 = position;
+/*
+        ckTookIt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mCheckInMedications.get(pos2).setTookIt(b);
+                notifyDataSetChanged();
+            }
+        });
+*/
+
+        ckTookIt.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mCheckInMedications.get(pos2).setTookIt(((CheckBox)view).isChecked());
+            }
+        } );
+
+	    Date dateNow = new Date(mCheckInMedications.get(position).getTookItTime());
 	    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 	    String strDate = formatter.format(dateNow);
 	    tvDate.setText(strDate);
@@ -79,10 +101,12 @@ public class CheckInMedicationAdapter extends BaseAdapter {
 	    tvDate.setOnClickListener(new OnClickListener(){
 	    	public void onClick(View v){            		
 	    		mView = v;
+                final View viewTime = ((View)v.getParent()).findViewById(R.id.tvTime);
 	    	    DatePickerDialog.OnDateSetListener dt=new DatePickerDialog.OnDateSetListener() {
 	    	    	public void onDateSet(DatePicker view, int year,
 	    			                          int month, int day) {
 	    			      updateDateView(mView, year, month, day);
+                        updateCheckInDateAndTime(mView, viewTime, pos2);
 	    			}
 	    		};
 	    		TextView tv = (TextView)v;
@@ -113,10 +137,12 @@ public class CheckInMedicationAdapter extends BaseAdapter {
 	    tvTime.setOnClickListener(new OnClickListener(){
 	    	public void onClick(View v){            		
 	    		mView = v;
+                final View viewDate = ((View)v.getParent()).findViewById(R.id.tvDate);
 	    	    TimePickerDialog.OnTimeSetListener t=new TimePickerDialog.OnTimeSetListener() {
 	    	    	public void onTimeSet(TimePicker view, int hourOfDay,
 	    			                          int minute) {
 	    			      updateTimeView(mView,hourOfDay, minute);
+                        updateCheckInDateAndTime(viewDate, mView, pos2);
 	    			}
 	    		};
 	    		TextView tv = (TextView)v;
@@ -148,8 +174,24 @@ public class CheckInMedicationAdapter extends BaseAdapter {
 	    retDate.set(year,month,day);
 	    String strRetDate = formatter.format(retDate.getTime());
 	    tx.setText(strRetDate);
-		
 	}
+
+    public void updateCheckInDateAndTime(View vDate, View vTime, int position) {
+        TextView tvDate = (TextView) vDate;
+        TextView tvTime = (TextView) vTime;
+        String strDateTimeMed = tvDate.getText() + " " + tvTime.getText() + ":00";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+        Date datMed = new Date();
+        try {
+            datMed = formatter.parse(strDateTimeMed);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            //default to current date/time as set before try/catch block, but print message on exception
+            System.out.println("Parse exception on CheckInMedication date " + strDateTimeMed);
+        }
+        mCheckInMedications.get(position).setTookItTime(datMed.getTime());
+        notifyDataSetChanged();
+    }
 	
 
 	public Context getContext() {

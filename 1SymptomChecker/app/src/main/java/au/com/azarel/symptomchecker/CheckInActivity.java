@@ -106,11 +106,11 @@ public class CheckInActivity extends ActionBarActivity {
 				Date datNow = new Date();
 				mCheckIn = new CheckIn(mPatient, mPatient.getPatientId(), "desc not needed",
 						datNow.getTime(), mPain, mEatingAffect, mbTookMedication);
-				ListView listView1 = (ListView) findViewById(R.id.checkin_medication_list);
+				//ListView listView1 = (ListView) findViewById(R.id.checkin_medication_list);
 
 		        //BUG This doesn't work unless all ListView rows are visible
 				// need to update items in the listAdapter and use getItemAtPosition instead
-		        ArrayList<String> timesToSave = new ArrayList<String>();
+/*		        ArrayList<String> timesToSave = new ArrayList<String>();
 		        for (int i = 0; i < listView1.getCount(); i++) {
 		        	View innerView = listView1.getChildAt(i);
 		        	CheckBox ckTookIt = (CheckBox)innerView.findViewById(R.id.ckMedication);
@@ -129,6 +129,7 @@ public class CheckInActivity extends ActionBarActivity {
 					}
 		        	mCheckInMedications.get(i).setTookItTime(datMed.getTime());
 		        }
+ */
 
 				AddCheckInToServer();
 			}		
