@@ -95,7 +95,13 @@ public class CheckInReadOnlyActivity extends ActionBarActivity {
 			((RadioButton)findViewById(R.id.rbPainSevere)).setChecked(true);
 			break;		
 		}
-		
+
+        //disable radiobuttons on readonly activity
+
+        ((RadioButton)findViewById(R.id.rbPainWellControlled)).setEnabled(false);
+        ((RadioButton)findViewById(R.id.rbPainModerate)).setEnabled(false);
+        ((RadioButton)findViewById(R.id.rbPainSevere)).setEnabled(false);
+
 		mEatingAffect = mCheckIn.getEatingAffect();
 
 		switch(mEatingAffect) {
@@ -110,26 +116,34 @@ public class CheckInReadOnlyActivity extends ActionBarActivity {
 			((RadioButton)findViewById(R.id.rbEatingAffectCantEat)).setChecked(true);
 			break;		
 		}
-		
-mbTookMedication = mCheckIn.getTookMedication();
-((CheckBox)findViewById(R.id.ckMedication)).setChecked(mbTookMedication);
-		
-		// initialize Arraylist of CheckInMedications to match that of PatientMedications
+
+        //disable radiobuttons on readonly activity
+
+        ((RadioButton)findViewById(R.id.rbEatingAffectNone)).setEnabled(false);
+        ((RadioButton)findViewById(R.id.rbEatingAffectSome)).setEnabled(false);
+        ((RadioButton)findViewById(R.id.rbEatingAffectCantEat)).setEnabled(false);
+
+        mbTookMedication = mCheckIn.getTookMedication();
+        ((CheckBox)findViewById(R.id.ckMedication)).setChecked(mbTookMedication);
+        ((CheckBox)findViewById(R.id.ckMedication)).setEnabled(false);
+
+        // initialize Arraylist of CheckInMedications to match that of PatientMedications
 		Date datNow = new Date();
 		boolean bResult = getMedicationsFromServer();
 
 		// listView of check in medications, time taken etc.
 		ListView listView;
 		listView = (ListView) findViewById(R.id.checkin_medication_list);
-		listView.setEnabled(false);
+		//listView.setEnabled(false);
 
 		mCheckInMedicationAdapter = new CheckInMedicationReadOnlyAdapter(this, mCheckInMedications);
 
 		listView.setAdapter(mCheckInMedicationAdapter );
 
 		
-		// Save button
+		// Save button, make it an OK button
 		Button btnOK = (Button)findViewById(R.id.btnCheckInOK);
+        btnOK.setText("OK");
 		btnOK.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -138,7 +152,8 @@ mbTookMedication = mCheckIn.getTookMedication();
 				finish();
 			}
 		});
-		
+
+        //Hide the Cancel Button
 		Button btnCancel = (Button)findViewById(R.id.btnCheckInCancel);
 		btnCancel.setOnClickListener(new OnClickListener(){
 
@@ -149,6 +164,7 @@ mbTookMedication = mCheckIn.getTookMedication();
 			}
 			
 		});
+        btnCancel.setVisibility(View.INVISIBLE);
 	}
 
 	@Override

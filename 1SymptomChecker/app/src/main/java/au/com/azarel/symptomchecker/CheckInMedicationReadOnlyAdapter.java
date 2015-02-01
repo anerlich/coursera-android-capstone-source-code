@@ -50,6 +50,7 @@ public class CheckInMedicationReadOnlyAdapter extends CheckInMedicationAdapter {
 
 	    tvMedication.setText(((CheckInMedication)getItem(position)).getPatientMedication().getMedication());
 	    ckTookIt.setChecked(((CheckInMedication)getItem(position)).getTookIt());
+        ckTookIt.setEnabled(false);
 	    
 	    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
 	    String strDate = formatter.format(((CheckInMedication)getItem(position)).getTookItTime());
