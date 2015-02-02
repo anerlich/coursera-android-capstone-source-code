@@ -119,11 +119,13 @@ public class PatientMedicationListActivity extends ActionBarActivity {
 				}
 				etAddMedication.setText("");
 				v.setEnabled(false);
-				mPatientMedicationArrayList.add(pm);
-				mPatientMedicationListAdapter.notifyDataSetChanged();
-				//line below included because the notifyDataSetChanged does not work
-				//I realise it is wasteful as hell on resources, but WTH, it works
-				PatientMedicationListActivity.this.recreate();
+
+                // reinitializing the adapter is meant to be extremely wasteful ,but I can't get notifyDatasetChanged()
+                //to work  - better than the earlier solution of recreating the entire activity
+
+                mPatientMedicationListAdapter =
+                        new PatientMedicationListAdapter(PatientMedicationListActivity.this, mPatientMedicationArrayList);
+                mListView.setAdapter(mPatientMedicationListAdapter );
 			}
 			
 		});
